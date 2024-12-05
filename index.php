@@ -10,8 +10,8 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 */
 $result = curl_exec($ch);
 
-//una alternativa sería utilizar file_get_contents
-// $result = file_get_contents(API_URL) //Si solo quieres hacer un GET de una API
+//una alternativa file_get_contents
+// $result = file_get_contents(API_URL) //Si solo quiero hacer un GET de una API
 $data = json_decode($result, true);
 
 curl_close($ch);
@@ -22,7 +22,8 @@ curl_close($ch);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The next MCU Film</title>
+    <title>Próxima peli de MCU</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
@@ -38,8 +39,8 @@ curl_close($ch);
     </section>
 
     <hgroup>
-        <h2><span><?= $data["title"]; ?></span> se estrena en <?= $data["days_until"]?> días</h2>
-        <h3>Fecha de estreno <?= $data["release_date"]?></h3>
+        <h2><span><?= $data["title"]; ?></span> se estrena en <span><?= $data["days_until"]?></span> días</h2>
+        <h3>Fecha de estreno: <?= $data["release_date"]?></h3>
         <p>La siguiente película es: <?= $data["following_production"]["title"]; ?></p>
     </hgroup>
 </main>
@@ -57,6 +58,10 @@ curl_close($ch);
     section {
         display: grid;
         place-content: center;
+    }
+
+    img {
+        border: 5px solid black;
     }
 
     hgroup {
